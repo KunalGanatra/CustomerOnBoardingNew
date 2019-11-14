@@ -34,7 +34,7 @@ namespace ANZ.CustomerOnboarding.Web.Services
         {
             var user = _users.Find(x => x.Username == username && x.Password == password).ToList().FirstOrDefault();
 
-           
+
             // null if user is not available
             if (user == null)
                 return null;
@@ -66,20 +66,21 @@ namespace ANZ.CustomerOnboarding.Web.Services
 
         //In Ideal scenario the username & password is set by the user
         //hence only role & the details of the person can be changed by the admin.
-        public void EditUser(User userData)
+        public bool EditUser(User userData)
         {
             var filter = Builders<User>.Filter.Eq("userName", userData.Username);
             var updateDefinition = Builders<User>.Update
                 .Set(m => m.FirstName, userData.FirstName)
                 .Set(m => m.LastName, userData.LastName)
                 .Set(m => m.Role, userData.Role);
-                
+
 
             var updateOptions = new UpdateOptions { IsUpsert = false };
             var result = _users.UpdateOne(filter, updateDefinition);
+            return result.IsAcknowledged;
         }
 
-      
+
         public async Task<List<User>> GetUsers(string searchCriteria)
         {
             var filter = Builders<User>.Filter.Regex("userName", new BsonRegularExpression(searchCriteria));

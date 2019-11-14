@@ -48,8 +48,8 @@ namespace ANZ.CustomerOnboarding.Web.Services
         /// <returns></returns>
         public async Task<List<Customer>> GetCustomersByName(string searchCriteria)
         {
-            var filter = Builders<Customer>.Filter.Regex("name", new BsonRegularExpression(searchCriteria,"i"));
-            var result=  await _customers.FindAsync(filter);
+            var filter = Builders<Customer>.Filter.Regex("name", new BsonRegularExpression(searchCriteria, "i"));
+            var result = await _customers.FindAsync(filter);
             return result.ToList();
         }
 
@@ -84,7 +84,7 @@ namespace ANZ.CustomerOnboarding.Web.Services
             _customers.InsertOne(customer);
         }
 
-        public void EditCustomer(Customer customer)
+        public bool EditCustomer(Customer customer)
         {
             var filter = Builders<Customer>.Filter.Eq("id", customer.CustomerId);
             var updateDefinition = Builders<Customer>.Update
@@ -98,12 +98,13 @@ namespace ANZ.CustomerOnboarding.Web.Services
 
             var updateOptions = new UpdateOptions { IsUpsert = false };
             var result = _customers.UpdateOne(filter, updateDefinition);
+            return result.IsAcknowledged;
 
         }
 
         public List<Customer> CheckDuplicatesForAdd(string customerId)
         {
-            
+
             var filter = Builders<Customer>.Filter.Eq(x => x.CustomerId, customerId);
             return _customers.Find(filter).ToList();
 

@@ -75,7 +75,9 @@ namespace ANZ.CustomerOnboarding.Web.Controllers
             if (user == null)
                 return BadRequest(new { message = "Invalid Customer Data" });
 
-            _userService.EditUser(user);
+            var acknowledged = _userService.EditUser(user);
+            if (!acknowledged)
+                return BadRequest(new { message = "Invalid Customer Data" });
             return Ok(user);
 
         }

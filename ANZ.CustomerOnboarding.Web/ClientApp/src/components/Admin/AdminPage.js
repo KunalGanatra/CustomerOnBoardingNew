@@ -92,11 +92,11 @@ export class AdminPage extends Component {
         };
 
         return (
-            <div className="col-md-6 col-md-offset-9">
+            <div className="col-md-6 col-md-offset-3">
                 <h2>Search User</h2>
-                <form name="form" class="form-horizontal pt-10">
+                <form name="form" class="form-horizontal">
                     <div class="form-group">
-                        <label class="col-sm-4 col-form-label " htmlFor="userSearch">UserName</label>
+                        <label class="col-sm-2 col-form-label " htmlFor="userSearch">UserName</label>
                         <div class="col-sm-8">
                             <input type="text" className="form-control" name="userSearch" value={this.state.searchCriteria} onChange={this.handleChange} />
                         </div>
@@ -111,14 +111,12 @@ export class AdminPage extends Component {
                         }
                     </div>
                     <div>
-                        <div>
+                        <div className="text-right">
 
-                            <div class="col-sm-3">
                                 <button className="btn btn-primary" name="add" onClick={this.addUser}>Add</button>
-                            </div>
-                            <div class="col-sm-3">
+                           &nbsp;
                                 <button className="btn btn-primary" name="edit" disabled={!this.state.selectedRow.id} onClick={this.editUser}>Edit</button>
-                            </div>
+                          
                             <AdminModal ref="child" refreshSearch={this.refresh} />
                         </div>
                     </div>

@@ -16,7 +16,7 @@ namespace ANZ.CustomerOnboarding.Web.Services
 
         void AddCustomer(Customer customer);
 
-        void EditCustomer(Customer customer);
+        bool EditCustomer(Customer customer);
 
         List<Customer> CheckDuplicatesForEdit(string customerId, string customerName);
 

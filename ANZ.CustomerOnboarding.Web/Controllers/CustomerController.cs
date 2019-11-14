@@ -76,8 +76,10 @@ namespace ANZ.CustomerOnboarding.Web.Controllers
             if (_customerService.CheckDuplicatesForEdit(customer.CustomerId, customer.Name).Count > 0)
                 return BadRequest(new { message = "Duplicate Data found" });
 
-            _customerService.EditCustomer(customer);
+            bool acknowledged = _customerService.EditCustomer(customer);
 
+            if(!acknowledged)
+                return BadRequest(new { message = "Invalid Customer Data" });
             return Ok(customer);
 
         }

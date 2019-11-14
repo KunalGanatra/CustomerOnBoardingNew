@@ -97,11 +97,11 @@ export class SearchCustomerPage extends Component {
         };
 
         return (
-            <div className="col-md-6 col-md-offset-9">
+            <div className="col-md-6 col-md-offset-3">
                 <h2>Search Customer</h2>
                 <form name="form" className="form-horizontal pt-10">
-                    <div className="form-group">
-                        <label className="col-sm-4 col-form-label " htmlFor="customerSearch">Search</label>
+                    <div className="form-group pt-10">
+                        <label className="col-sm-2 col-form-label " htmlFor="customerSearch">Search</label>
                         <div className="col-sm-8">
                             <input type="text" className="form-control" name="customerSearch" value={this.state.searchCriteria} onChange={this.handleChange} />
                         </div>
@@ -115,28 +115,24 @@ export class SearchCustomerPage extends Component {
                         />
                         }
                     </div>
-                    <div>
-                        <div >
-
+                    <div className="text-right" >
                             {!this.state.isViewOnly &&
-                                <div className="col-sm-3">
+                               
                                     <button className="btn btn-primary" name="add" onClick={this.addCustomer}>Add</button>
-                                </div>
-                            }
+                               
+                                }
+                        &nbsp;
                             {!this.state.isViewOnly &&
-                                <div className="col-sm-3">
+                                
                                     <button className="btn btn-primary" name="edit" disabled={!this.state.selectedRow.id} onClick={this.editCustomer}>Edit</button>
-                                </div>
+                               
                             }
-
-
-                            <div className="col-sm-3">
+                           &nbsp;
                                 <button className="btn btn-primary" disabled={!this.state.selectedRow.id} onClick={this.viewCustomer}>View</button>
-                            </div>
+                            
 
                             <CustomerModal ref="child" refreshSearch={this.refresh} />
                             <CustomerViewModal ref="childView" refreshSearch={this.refresh} />
-                        </div>
                     </div>
                 </form>
             </div>

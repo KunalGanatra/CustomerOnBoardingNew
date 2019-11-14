@@ -10,7 +10,7 @@ namespace ANZ.CustomerOnboarding.Web.Services
     {
         User Authenticate(string username, string password);
         void AddUser(User userData);
-        void EditUser(User userData);
+        bool EditUser(User userData);
         Task<List<User>> GetUsers(string searchCriteria);
         List<User> CheckDuplicatesForUserName(string searchCriteria);
     }

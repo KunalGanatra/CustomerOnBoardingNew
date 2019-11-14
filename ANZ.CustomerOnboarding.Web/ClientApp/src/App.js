@@ -69,7 +69,7 @@ export default class App extends React.Component {
                     <div className="jumbotron">
                         <div className="container">
                             <div className="row">
-                                <div className="col-md-6 offset-md-3 c">
+                                <div className="col-md-12">
                                     <PrivateRoute exact path="/" component={SearchCustomerPage} />
                                     <PrivateRoute path="/admin" roles={[Role.Admin]} component={AdminPage} />
                                     <Route path="/login" component={LoginPage} />
